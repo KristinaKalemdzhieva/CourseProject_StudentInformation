@@ -122,7 +122,33 @@ void groupMenu(const int group)
 
 void printStudentsFromVariousGroups()
 {
+	std::cout << "Enter groups (please enter the numbers of the groups separated by spaces): ";
+	char groups[15];
+	std::cin.getline(groups, 15);
+	std::cout << std::endl;
 
+	for (int i = 0; groups[i] != '\0'; ++i)
+	{
+		switch (groups[i])
+		{
+		case '1':
+			break;
+		case '2':
+			break;
+		case '3':
+			break;
+		case '4':
+			break;
+		case '5':
+			break;
+		case '6':
+			break;
+		case '7':
+			break;
+		case '8':
+			break;
+		}
+	}
 }
 
 void mainMenu()
