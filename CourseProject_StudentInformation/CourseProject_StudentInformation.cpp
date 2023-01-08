@@ -4,7 +4,40 @@ void mainMenu();
 
 void enterStudent(const int group)
 {
+	std::cout << "First name: ";
+	char firstName;
+	std::cin >> firstName;
+	std::cout << std::endl;
 
+	std::cout << "Second name: ";
+	char secondName;
+	std::cin >> secondName;
+	std::cout << std::endl;
+
+	std::cout << "Last name: ";
+	char lastName;
+	std::cin >> lastName;
+	std::cout << std::endl;
+
+	std::cout << "Faculty number: ";
+	char facultyNumber;
+	std::cin >> facultyNumber;
+	std::cout << std::endl;
+
+	std::cout << "Тotal count of student's disciplines: ";
+	int n;
+	std::cin >> n;
+	std::cout << std::endl;
+	char disciplines[10][2];
+	for (int i = 0; i < n; ++i)
+	{
+		std::cout << "Discipline - mark: ";
+		for (int j = 0; j < 2; ++j)
+		{
+			std::cin >> disciplines[i][j];
+		}
+		std::cout << std::endl;
+	}
 }
 
 void unsubscribeStudent(const int group)
