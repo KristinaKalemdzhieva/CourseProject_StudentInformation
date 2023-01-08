@@ -42,7 +42,10 @@ void enterStudent(const int group)
 
 void unsubscribeStudent(const int group)
 {
-
+	std::cout << "Enter student's faculty number: ";
+	char facultyNumber;
+	std::cin >> facultyNumber;
+	std::cout << std::endl;
 }
 
 void sortStudents(const int group)
