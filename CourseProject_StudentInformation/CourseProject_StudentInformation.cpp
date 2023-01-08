@@ -50,7 +50,37 @@ void unsubscribeStudent(const int group)
 
 void sortStudents(const int group)
 {
+	std::cout << "Sort by average success or faculty number (please write 'a' for average success and 'f' for faculty number): ";
+	char sortBy;
+	std::cin >> sortBy;
+	std::cout << std::endl;
 
+	std::cout << "Sort in ascending/descending order (please write 'a' for ASC and 'd' for DESC): ";
+	char wayToSort;
+	std::cin >> wayToSort;
+	std::cout << std::endl;
+
+	switch (sortBy)
+	{
+	case 'a':
+		switch (wayToSort)
+		{
+		case 'a':
+			break;
+		case 'd':
+			break;
+		}
+		break;
+	case 'f':
+		switch (wayToSort)
+		{
+		case 'a':
+			break;
+		case 'd':
+			break;
+		}
+		break;
+	}
 }
 
 void printStudents(const int group)
