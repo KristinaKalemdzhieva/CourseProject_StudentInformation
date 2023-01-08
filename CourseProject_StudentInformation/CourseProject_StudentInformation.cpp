@@ -1,27 +1,29 @@
 ﻿#include <iostream>
 #include <fstream>
+#include <clocale>
 
 void mainMenu();
 
+//ima nqkakvyv problem i ne raboti zaradi nego!
 void enterStudent(const int group)
 {
 	std::cout << "First name: ";
-	char firstName;
+	char firstName[20];
 	std::cin >> firstName;
 	std::cout << std::endl;
 
 	std::cout << "Second name: ";
-	char secondName;
+	char secondName[25];
 	std::cin >> secondName;
 	std::cout << std::endl;
 
 	std::cout << "Last name: ";
-	char lastName;
+	char lastName[25];
 	std::cin >> lastName;
 	std::cout << std::endl;
 
 	std::cout << "Faculty number: ";
-	char facultyNumber;
+	char facultyNumber[7];
 	std::cin >> facultyNumber;
 	std::cout << std::endl;
 
@@ -34,8 +36,9 @@ void enterStudent(const int group)
 	for (int i = 0; i < n; ++i)
 	{
 		std::cout << "Discipline - mark: ";
-		std::cin >> disciplines[i] >> marks[i];
-		//std::cout << std::endl;
+		std::cin >> disciplines[i];
+		std::cin >> marks[i];
+		std::cout << std::endl;
 	}
 
 	if (group == 1)
@@ -45,11 +48,11 @@ void enterStudent(const int group)
 		if (firstGroup.is_open())
 		{
 			firstGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
-			for (int i = 0; i < n - 1; ++i)
+			for (int i = 0; i < n; ++i)
 			{
 				firstGroup << disciplines[i] << " " << marks[i] << " ";
 			}
-			firstGroup << disciplines[n - 1] << " " << marks[n - 1];
+			firstGroup << std::endl;
 
 			firstGroup.close();
 		}
@@ -61,11 +64,11 @@ void enterStudent(const int group)
 		if (secondGroup.is_open())
 		{
 			secondGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
-			for (int i = 0; i < n - 1; ++i)
+			for (int i = 0; i < n; ++i)
 			{
 				secondGroup << disciplines[i] << " " << marks[i] << " ";
 			}
-			secondGroup << disciplines[n - 1] << " " << marks[n - 1];
+			secondGroup << std::endl;
 
 			secondGroup.close();
 		}
@@ -77,11 +80,11 @@ void enterStudent(const int group)
 		if (thirdGroup.is_open())
 		{
 			thirdGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
-			for (int i = 0; i < n - 1; ++i)
+			for (int i = 0; i < n; ++i)
 			{
 				thirdGroup << disciplines[i] << " " << marks[i] << " ";
 			}
-			thirdGroup << disciplines[n - 1] << " " << marks[n - 1];
+			thirdGroup << std::endl;
 
 			thirdGroup.close();
 		}
@@ -93,11 +96,11 @@ void enterStudent(const int group)
 		if (fourthGroup.is_open())
 		{
 			fourthGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
-			for (int i = 0; i < n - 1; ++i)
+			for (int i = 0; i < n; ++i)
 			{
 				fourthGroup << disciplines[i] << " " << marks[i] << " ";
 			}
-			fourthGroup << disciplines[n - 1] << " " << marks[n - 1];
+			fourthGroup << std::endl;
 
 			fourthGroup.close();
 		}
@@ -109,11 +112,11 @@ void enterStudent(const int group)
 		if (fifthGroup.is_open())
 		{
 			fifthGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
-			for (int i = 0; i < n - 1; ++i)
+			for (int i = 0; i < n; ++i)
 			{
 				fifthGroup << disciplines[i] << " " << marks[i] << " ";
 			}
-			fifthGroup << disciplines[n - 1] << " " << marks[n - 1];
+			fifthGroup << std::endl;
 
 			fifthGroup.close();
 		}
@@ -125,11 +128,11 @@ void enterStudent(const int group)
 		if (sixthGroup.is_open())
 		{
 			sixthGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
-			for (int i = 0; i < n - 1; ++i)
+			for (int i = 0; i < n; ++i)
 			{
 				sixthGroup << disciplines[i] << " " << marks[i] << " ";
 			}
-			sixthGroup << disciplines[n - 1] << " " << marks[n - 1];
+			sixthGroup << std::endl;
 
 			sixthGroup.close();
 		}
@@ -141,11 +144,11 @@ void enterStudent(const int group)
 		if (seventhGroup.is_open())
 		{
 			seventhGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
-			for (int i = 0; i < n - 1; ++i)
+			for (int i = 0; i < n; ++i)
 			{
 				seventhGroup << disciplines[i] << " " << marks[i] << " ";
 			}
-			seventhGroup << disciplines[n - 1] << " " << marks[n - 1];
+			seventhGroup << std::endl;
 
 			seventhGroup.close();
 		}
@@ -157,11 +160,11 @@ void enterStudent(const int group)
 		if (eighthGroup.is_open())
 		{
 			eighthGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
-			for (int i = 0; i < n - 1; ++i)
+			for (int i = 0; i < n; ++i)
 			{
 				eighthGroup << disciplines[i] << " " << marks[i] << " ";
 			}
-			eighthGroup << disciplines[n - 1] << " " << marks[n - 1];
+			eighthGroup << std::endl;
 
 			eighthGroup.close();
 		}
@@ -227,6 +230,7 @@ void groupMenu(const int group)
 	std::cout << "Choose a number: ";
 	int n;
 	std::cin >> n;
+	std::cout << std::endl;
 
 	switch (n)
 	{
@@ -291,7 +295,6 @@ void mainMenu()
 	std::cout << "8. Eigth Group Menu" << std::endl;
 	std::cout << "9. Print student information for more than one group" << std::endl;
 	std::cout << "10. Exit" << std::endl << std::endl;
-	std::cout << std::endl;
 
 	std::cout << "Choose a number: ";
 	int n;
@@ -336,5 +339,6 @@ void mainMenu()
 
 int main()
 {
+	setlocale(LC_ALL, "bulgarian");
 	mainMenu();
 }
