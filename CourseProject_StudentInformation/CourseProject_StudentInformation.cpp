@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <fstream>
 
 void mainMenu();
 
@@ -28,15 +29,142 @@ void enterStudent(const int group)
 	int n;
 	std::cin >> n;
 	std::cout << std::endl;
-	char disciplines[10][2];
+	char disciplines[10];
+	double marks[10];
 	for (int i = 0; i < n; ++i)
 	{
 		std::cout << "Discipline - mark: ";
-		for (int j = 0; j < 2; ++j)
+		std::cin >> disciplines[i] >> marks[i];
+		//std::cout << std::endl;
+	}
+
+	if (group == 1)
+	{
+		std::fstream firstGroup;
+		firstGroup.open("firstGroup.txt", std::ios::app);
+		if (firstGroup.is_open())
 		{
-			std::cin >> disciplines[i][j];
+			firstGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
+			for (int i = 0; i < n - 1; ++i)
+			{
+				firstGroup << disciplines[i] << " " << marks[i] << " ";
+			}
+			firstGroup << disciplines[n - 1] << " " << marks[n - 1];
+
+			firstGroup.close();
 		}
-		std::cout << std::endl;
+	}
+	else if (group == 2)
+	{
+		std::fstream secondGroup;
+		secondGroup.open("secondGroup.txt", std::ios::app);
+		if (secondGroup.is_open())
+		{
+			secondGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
+			for (int i = 0; i < n - 1; ++i)
+			{
+				secondGroup << disciplines[i] << " " << marks[i] << " ";
+			}
+			secondGroup << disciplines[n - 1] << " " << marks[n - 1];
+
+			secondGroup.close();
+		}
+	}
+	else if (group == 3)
+	{
+		std::fstream thirdGroup;
+		thirdGroup.open("thirdGroup.txt", std::ios::app);
+		if (thirdGroup.is_open())
+		{
+			thirdGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
+			for (int i = 0; i < n - 1; ++i)
+			{
+				thirdGroup << disciplines[i] << " " << marks[i] << " ";
+			}
+			thirdGroup << disciplines[n - 1] << " " << marks[n - 1];
+
+			thirdGroup.close();
+		}
+	}
+	else if (group == 4)
+	{
+		std::fstream fourthGroup;
+		fourthGroup.open("fourthGroup.txt", std::ios::app);
+		if (fourthGroup.is_open())
+		{
+			fourthGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
+			for (int i = 0; i < n - 1; ++i)
+			{
+				fourthGroup << disciplines[i] << " " << marks[i] << " ";
+			}
+			fourthGroup << disciplines[n - 1] << " " << marks[n - 1];
+
+			fourthGroup.close();
+		}
+	}
+	else if (group == 5)
+	{
+		std::fstream fifthGroup;
+		fifthGroup.open("fifthGroup.txt", std::ios::app);
+		if (fifthGroup.is_open())
+		{
+			fifthGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
+			for (int i = 0; i < n - 1; ++i)
+			{
+				fifthGroup << disciplines[i] << " " << marks[i] << " ";
+			}
+			fifthGroup << disciplines[n - 1] << " " << marks[n - 1];
+
+			fifthGroup.close();
+		}
+	}
+	else if (group == 6)
+	{
+		std::fstream sixthGroup;
+		sixthGroup.open("sixthGroup.txt", std::ios::app);
+		if (sixthGroup.is_open())
+		{
+			sixthGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
+			for (int i = 0; i < n - 1; ++i)
+			{
+				sixthGroup << disciplines[i] << " " << marks[i] << " ";
+			}
+			sixthGroup << disciplines[n - 1] << " " << marks[n - 1];
+
+			sixthGroup.close();
+		}
+	}
+	else if (group == 7)
+	{
+		std::fstream seventhGroup;
+		seventhGroup.open("seventhGroup.txt", std::ios::app);
+		if (seventhGroup.is_open())
+		{
+			seventhGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
+			for (int i = 0; i < n - 1; ++i)
+			{
+				seventhGroup << disciplines[i] << " " << marks[i] << " ";
+			}
+			seventhGroup << disciplines[n - 1] << " " << marks[n - 1];
+
+			seventhGroup.close();
+		}
+	}
+	else if (group == 8)
+	{
+		std::fstream eighthGroup;
+		eighthGroup.open("eighthGroup.txt", std::ios::app);
+		if (eighthGroup.is_open())
+		{
+			eighthGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
+			for (int i = 0; i < n - 1; ++i)
+			{
+				eighthGroup << disciplines[i] << " " << marks[i] << " ";
+			}
+			eighthGroup << disciplines[n - 1] << " " << marks[n - 1];
+
+			eighthGroup.close();
+		}
 	}
 }
 
