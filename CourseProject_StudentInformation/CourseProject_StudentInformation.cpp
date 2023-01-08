@@ -1,8 +1,57 @@
 ﻿#include <iostream>
 
-void groupMenu(const int group)
+void mainMenu();
+
+void enterStudent(const int group)
 {
 
+}
+
+void unsubscribeStudent(const int group)
+{
+
+}
+
+void sortStudents(const int group)
+{
+
+}
+
+void printStudents(const int group)
+{
+
+}
+
+void groupMenu(const int group)
+{
+	std::cout << "1. Enter student" << std::endl;
+	std::cout << "2. Unsubscribe student" << std::endl;
+	std::cout << "3. Sort Students" << std::endl;
+	std::cout << "4. Print list of the students" << std::endl;
+	std::cout << "5. Back" << std::endl << std::endl;
+
+	std::cout << "Choose a number: ";
+	int n;
+	std::cin >> n;
+
+	switch (n)
+	{
+	case 1:
+		enterStudent(group);
+		break;
+	case 2:
+		unsubscribeStudent(group);
+		break;
+	case 3:
+		sortStudents(group);
+		break;
+	case 4:
+		printStudents(group);
+		break;
+	case 5:
+		mainMenu();
+		break;
+	}
 }
 
 void printStudentsFromVariousGroups()
@@ -22,10 +71,12 @@ void mainMenu()
 	std::cout << "8. Eigth Group Menu" << std::endl;
 	std::cout << "9. Print student information for more than one group" << std::endl;
 	std::cout << "10. Exit" << std::endl << std::endl;
+	std::cout << std::endl;
 
 	std::cout << "Choose a number: ";
 	int n;
 	std::cin >> n;
+	std::cout << std::endl;
 
 	switch (n)
 	{
@@ -61,7 +112,6 @@ void mainMenu()
 		break;
 	}
 }
-
 
 
 int main()
