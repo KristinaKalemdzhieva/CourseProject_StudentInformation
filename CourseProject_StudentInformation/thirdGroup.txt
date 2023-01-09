@@ -1,0 +1,5 @@
+Kamen Todorov Grigorov 0951250 English 5.38 OOP 4.50
+Jordan Jonkov Tachev 0770489 SDA 3.33 Algebra 5.10
+Ralitsa Stoyanova Kapudzhieva 0783995 DIS1 4.79
+Ognyan Stoilov Filipov 0088935 DIS1 3.90 UP 4.76
+Ginka Krasimirova Pencheva 0126279 Geometry 6.00

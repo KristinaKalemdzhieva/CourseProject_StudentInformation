@@ -1,8 +1,10 @@
 ﻿#include <iostream>
 #include <fstream>
-#include <clocale>
+#include <string>
 
 void mainMenu();
+
+void groupMenu(const int group);
 
 //ima nqkakvyv problem i ne raboti zaradi nego!
 void enterStudent(const int group)
@@ -27,148 +29,71 @@ void enterStudent(const int group)
 	std::cin >> facultyNumber;
 	std::cout << std::endl;
 
-	std::cout << "Тotal count of student's disciplines: ";
+	std::cout << "Total count of student's disciplines: ";
 	int n;
 	std::cin >> n;
 	std::cout << std::endl;
-	char disciplines[10];
+	char **disciplines = new char*[10];
 	double marks[10];
 	for (int i = 0; i < n; ++i)
 	{
-		std::cout << "Discipline - mark: ";
-		std::cin >> disciplines[i];
+		disciplines[i] = new char[10];
+		char discipline[10];
+
+		std::cout << "Discipline: ";
+		std::cin >> discipline;
+		disciplines[i] = discipline;
+		std::cout << std::endl;
+
+		std::cout << "Mark: ";
 		std::cin >> marks[i];
 		std::cout << std::endl;
 	}
 
-	if (group == 1)
+	std::string fileName;
+	switch (group)
 	{
-		std::fstream firstGroup;
-		firstGroup.open("firstGroup.txt", std::ios::app);
-		if (firstGroup.is_open())
-		{
-			firstGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
-			for (int i = 0; i < n; ++i)
-			{
-				firstGroup << disciplines[i] << " " << marks[i] << " ";
-			}
-			firstGroup << std::endl;
-
-			firstGroup.close();
-		}
+	case 1:
+		fileName = "firstGroup.txt";
+		break;
+	case 2:
+		fileName = "secondGroup.txt";
+		break;
+	case 3:
+		fileName = "thirdGroup.txt";
+		break;
+	case 4:
+		fileName = "fourthGroup.txt";
+		break;
+	case 5:
+		fileName = "fifthGroup.txt";
+		break;
+	case 6:
+		fileName = "sixthGroup.txt";
+		break;
+	case 7:
+		fileName = "seventhGroup.txt";
+		break;
+	case 8:
+		fileName = "eighthGroup.txt";
+		break;
 	}
-	else if (group == 2)
+
+	std::fstream groupFile;
+	groupFile.open(fileName, std::ios::app);
+	if (groupFile.is_open())
 	{
-		std::fstream secondGroup;
-		secondGroup.open("secondGroup.txt", std::ios::app);
-		if (secondGroup.is_open())
-		{
-			secondGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
-			for (int i = 0; i < n; ++i)
-			{
-				secondGroup << disciplines[i] << " " << marks[i] << " ";
-			}
-			secondGroup << std::endl;
-
-			secondGroup.close();
+		groupFile << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
+		for (int i = 0; i < n; ++i)
+		{	
+			groupFile << disciplines[i] << " " << marks[i] << " ";
 		}
+		groupFile << std::endl;
+		groupFile.close();
 	}
-	else if (group == 3)
-	{
-		std::fstream thirdGroup;
-		thirdGroup.open("thirdGroup.txt", std::ios::app);
-		if (thirdGroup.is_open())
-		{
-			thirdGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
-			for (int i = 0; i < n; ++i)
-			{
-				thirdGroup << disciplines[i] << " " << marks[i] << " ";
-			}
-			thirdGroup << std::endl;
+	delete[] disciplines;
 
-			thirdGroup.close();
-		}
-	}
-	else if (group == 4)
-	{
-		std::fstream fourthGroup;
-		fourthGroup.open("fourthGroup.txt", std::ios::app);
-		if (fourthGroup.is_open())
-		{
-			fourthGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
-			for (int i = 0; i < n; ++i)
-			{
-				fourthGroup << disciplines[i] << " " << marks[i] << " ";
-			}
-			fourthGroup << std::endl;
-
-			fourthGroup.close();
-		}
-	}
-	else if (group == 5)
-	{
-		std::fstream fifthGroup;
-		fifthGroup.open("fifthGroup.txt", std::ios::app);
-		if (fifthGroup.is_open())
-		{
-			fifthGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
-			for (int i = 0; i < n; ++i)
-			{
-				fifthGroup << disciplines[i] << " " << marks[i] << " ";
-			}
-			fifthGroup << std::endl;
-
-			fifthGroup.close();
-		}
-	}
-	else if (group == 6)
-	{
-		std::fstream sixthGroup;
-		sixthGroup.open("sixthGroup.txt", std::ios::app);
-		if (sixthGroup.is_open())
-		{
-			sixthGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
-			for (int i = 0; i < n; ++i)
-			{
-				sixthGroup << disciplines[i] << " " << marks[i] << " ";
-			}
-			sixthGroup << std::endl;
-
-			sixthGroup.close();
-		}
-	}
-	else if (group == 7)
-	{
-		std::fstream seventhGroup;
-		seventhGroup.open("seventhGroup.txt", std::ios::app);
-		if (seventhGroup.is_open())
-		{
-			seventhGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
-			for (int i = 0; i < n; ++i)
-			{
-				seventhGroup << disciplines[i] << " " << marks[i] << " ";
-			}
-			seventhGroup << std::endl;
-
-			seventhGroup.close();
-		}
-	}
-	else if (group == 8)
-	{
-		std::fstream eighthGroup;
-		eighthGroup.open("eighthGroup.txt", std::ios::app);
-		if (eighthGroup.is_open())
-		{
-			eighthGroup << firstName << " " << secondName << " " << lastName << " " << facultyNumber << " ";
-			for (int i = 0; i < n; ++i)
-			{
-				eighthGroup << disciplines[i] << " " << marks[i] << " ";
-			}
-			eighthGroup << std::endl;
-
-			eighthGroup.close();
-		}
-	}
+	groupMenu(group);
 }
 
 void unsubscribeStudent(const int group)
@@ -177,6 +102,8 @@ void unsubscribeStudent(const int group)
 	char facultyNumber;
 	std::cin >> facultyNumber;
 	std::cout << std::endl;
+
+	groupMenu(group);
 }
 
 void sortStudents(const int group)
@@ -212,6 +139,8 @@ void sortStudents(const int group)
 		}
 		break;
 	}
+
+	groupMenu(group);
 }
 
 //poradi neznaina prichina ne otpechatva
@@ -329,6 +258,8 @@ void printStudents(const int group)
 			eighthGroup.close();
 		}
 	}
+
+	groupMenu(group);
 }
 
 void groupMenu(const int group)
@@ -393,6 +324,8 @@ void printStudentsFromVariousGroups()
 			break;
 		}
 	}
+
+	mainMenu();
 }
 
 void mainMenu()
@@ -443,6 +376,7 @@ void mainMenu()
 		printStudentsFromVariousGroups();
 		break;
 	case 10:
+		std::cout << "Have a nice day! :)" << std::endl;
 		return;
 		break;
 	}
@@ -451,6 +385,5 @@ void mainMenu()
 
 int main()
 {
-	setlocale(LC_ALL, "bulgarian");
 	mainMenu();
 }
