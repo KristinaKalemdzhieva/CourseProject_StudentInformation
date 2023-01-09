@@ -6,7 +6,6 @@ void mainMenu();
 
 void groupMenu(const int group);
 
-//ima nqkakvyv problem i ne raboti zaradi nego!
 void enterStudent(const int group)
 {
 	std::cout << "First name: ";
@@ -146,117 +145,49 @@ void sortStudents(const int group)
 //poradi neznaina prichina ne otpechatva
 void printStudents(const int group)
 {
-	if (group == 1)
+	std::cout << "List of students in " << group << " group: " << std::endl << std::endl;
+
+	std::string fileName;
+	switch (group)
 	{
-		std::fstream firstGroup;
-		firstGroup.open("firstGroup.txt", std::ios::in);	
-		if (firstGroup.is_open())
-		{		
-			char line[50];
-			while (firstGroup.getline(line, 50))
-			{
-				std::cout << line << std::endl;
-			}
-			firstGroup.close();
-		}
+	case 1:
+		fileName = "firstGroup.txt";
+		break;
+	case 2:
+		fileName = "secondGroup.txt";
+		break;
+	case 3:
+		fileName = "thirdGroup.txt";
+		break;
+	case 4:
+		fileName = "fourthGroup.txt";
+		break;
+	case 5:
+		fileName = "fifthGroup.txt";
+		break;
+	case 6:
+		fileName = "sixthGroup.txt";
+		break;
+	case 7:
+		fileName = "seventhGroup.txt";
+		break;
+	case 8:
+		fileName = "eighthGroup.txt";
+		break;
 	}
-	else if (group == 2)
+
+	std::fstream groupFile;
+	groupFile.open(fileName, std::ios::in);
+	if (groupFile.is_open())
 	{
-		std::fstream secondGroup;
-		secondGroup.open("secondGroup.txt", std::ios::in);
-		if (secondGroup.is_open())
+		char line[100];
+		while (groupFile.getline(line, 100))
 		{
-			char line[50];
-			while (secondGroup.getline(line, 50))
-			{
-				std::cout << line << std::endl;
-			}
-			secondGroup.close();
+			std::cout << line << std::endl;
 		}
-	}
-	else if (group == 3)
-	{
-		std::fstream thirdGroup;
-		thirdGroup.open("thirdGroup.txt", std::ios::in);
-		if (thirdGroup.is_open())
-		{
-			char line[50];
-			while (thirdGroup.getline(line, 50))
-			{
-				std::cout << line << std::endl;
-			}
-			thirdGroup.close();
-		}
-	}
-	else if (group == 4)
-	{
-		std::fstream fourthGroup;
-		fourthGroup.open("fourthGroup.txt", std::ios::in);
-		if (fourthGroup.is_open())
-		{
-			char line[50];
-			while (fourthGroup.getline(line, 50))
-			{
-				std::cout << line << std::endl;
-			}
-			fourthGroup.close();
-		}
-	}
-	else if (group == 5)
-	{
-		std::fstream fifthGroup;
-		fifthGroup.open("fifthGroup.txt", std::ios::in);
-		if (fifthGroup.is_open())
-		{
-			char line[50];
-			while (fifthGroup.getline(line, 50))
-			{
-				std::cout << line << std::endl;
-			}
-			fifthGroup.close();
-		}
-	}
-	else if (group == 6)
-	{
-		std::fstream sixthGroup;
-		sixthGroup.open("sixthGroup.txt", std::ios::in);
-		if (sixthGroup.is_open())
-		{
-			char line[50];
-			while (sixthGroup.getline(line, 50))
-			{
-				std::cout << line << std::endl;
-			}
-			sixthGroup.close();
-		}
-	}
-	else if (group == 7)
-	{
-		std::fstream seventhGroup;
-		seventhGroup.open("seventhGroup.txt", std::ios::in);
-		if (seventhGroup.is_open())
-		{
-			char line[50];
-			while (seventhGroup.getline(line, 50))
-			{
-				std::cout << line << std::endl;
-			}
-			seventhGroup.close();
-		}
-	}
-	else if (group == 8)
-	{
-		std::fstream eighthGroup;
-		eighthGroup.open("eighthGroup.txt", std::ios::in);
-		if (eighthGroup.is_open())
-		{
-			char line[50];
-			while (eighthGroup.getline(line, 50))
-			{
-				std::cout << line << std::endl;
-			}
-			eighthGroup.close();
-		}
+		std::cout << std::endl;
+
+		groupFile.close();
 	}
 
 	groupMenu(group);
