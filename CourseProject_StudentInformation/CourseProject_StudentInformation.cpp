@@ -95,12 +95,98 @@ void enterStudent(const int group)
 	groupMenu(group);
 }
 
+void getFacultyNumber(const char line[], char facultyNumber[])
+{
+	for (int i = 0; line[i] != '\0'; ++i)
+	{
+		if (line[i] == '0')
+		{
+			for (int j = 0; j < 7; ++j)
+			{
+				facultyNumber[j] = line[i];
+				++i;
+			}
+			break;
+		}
+	}
+}
+
 void unsubscribeStudent(const int group)
 {
 	std::cout << "Enter student's faculty number: ";
-	char facultyNumber;
+	char facultyNumber[7];
 	std::cin >> facultyNumber;
 	std::cout << std::endl;
+
+	std::string fileName;
+	switch (group)
+	{
+	case 1:
+		fileName = "firstGroup.txt";
+		break;
+	case 2:
+		fileName = "secondGroup.txt";
+		break;
+	case 3:
+		fileName = "thirdGroup.txt";
+		break;
+	case 4:
+		fileName = "fourthGroup.txt";
+		break;
+	case 5:
+		fileName = "fifthGroup.txt";
+		break;
+	case 6:
+		fileName = "sixthGroup.txt";
+		break;
+	case 7:
+		fileName = "seventhGroup.txt";
+		break;
+	case 8:
+		fileName = "eighthGroup.txt";
+		break;
+	}
+
+	std::fstream groupFile;
+	groupFile.open(fileName, std::ios::in);
+
+	std::fstream tempFile;
+	tempFile.open("temp.txt", std::ios::out);
+
+	if (groupFile.is_open() && tempFile.is_open())
+	{
+		char line[100];
+		while (groupFile.getline(line, 100))
+		{
+			char facultyNumberCurrentLine[7];
+			getFacultyNumber(line, facultyNumberCurrentLine);
+
+			bool flag = true;
+			for (int i = 0; facultyNumber[i] != '\0'; ++i)
+			{
+				if (facultyNumberCurrentLine[i] == facultyNumber[i])
+				{
+					continue;
+				}
+				else
+				{
+					flag = false;
+					break;
+				}
+			}
+
+			if (flag == false)
+			{
+				tempFile << line << std::endl;
+			}
+		}	
+
+		tempFile.close();
+		groupFile.close();
+	    const char* directoryToFile = fileName.c_str();
+		remove(directoryToFile);
+		rename("temp.txt", directoryToFile);
+	}
 
 	groupMenu(group);
 }
@@ -142,7 +228,6 @@ void sortStudents(const int group)
 	groupMenu(group);
 }
 
-//poradi neznaina prichina ne otpechatva
 void printStudents(const int group)
 {
 	std::cout << "List of students in " << group << " group: " << std::endl << std::endl;
