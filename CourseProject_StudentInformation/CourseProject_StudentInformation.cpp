@@ -191,6 +191,197 @@ void unsubscribeStudent(const int group)
 	groupMenu(group);
 }
 
+int getLinesCount(const std::string fileName)
+{
+	std::fstream myFile;
+	myFile.open(fileName, std::ios::in);
+	int count = 0;
+	if (myFile.is_open())
+	{
+		char line[100];
+		while (myFile.getline(line, 100))
+		{
+			++count;
+		}
+		myFile.close();
+	}	
+	return count;
+}
+
+void myStrCpy(char* a, char* b)
+{
+	int index = 0;
+	while (a[index] != '\0')
+	{
+		b[index] = a[index];
+		++index;
+	}
+	b[index] = '\0';
+}
+
+void mySwap(char* a, char* b)
+{
+	char temp[7];
+	myStrCpy(a, temp);
+	myStrCpy(b, a);
+	myStrCpy(temp, b);
+}
+
+int myStrCmp(const char* a, const char* b)
+{
+	int index = 0;
+	while (a[index] != '\0' && a[index] == b[index])
+	{
+		++index;
+	}
+
+	return a[index] - b[index];
+}
+
+void selectionSortFacultyNumbers(char** facultyNumbers, const int size, const char wayToSort)
+{
+	if (wayToSort == 'a') 
+	{
+		for (int i = 0; i < size - 1; ++i)
+		{
+			int indexOfMaxElement = i;
+			for (int j = i + 1; j < size; ++j)
+			{
+				if (myStrCmp(facultyNumbers[indexOfMaxElement], facultyNumbers[j]) > 0)
+				{
+					indexOfMaxElement = j;
+				}
+			}
+			mySwap(facultyNumbers[i], facultyNumbers[indexOfMaxElement]);
+		}
+	}
+	else
+	{
+		for (int i = 0; i < size - 1; ++i)
+		{
+			int indexOfMinElement = i;
+			for (int j = i + 1; j < size; ++j)
+			{
+				if (myStrCmp(facultyNumbers[indexOfMinElement], facultyNumbers[j]) < 0)
+				{
+					indexOfMinElement = j;
+				}
+			}
+			mySwap(facultyNumbers[i], facultyNumbers[indexOfMinElement]);
+		}
+	}
+}
+
+void sortInformation(char** studentsInformation, char** facultyNumbers, const int linesCount)
+{
+	for (int i = 0; i < linesCount; ++i) //obhojdame facultetnite nomera
+	{
+		for (int j = 0; j < linesCount; ++j) //obhojdame facultetnite nomera v obshtata ingormaciq
+		{
+			char tempFacultyNumber[7]; // pazi fac number na segashniq red
+			getFacultyNumber(studentsInformation[j], tempFacultyNumber);
+			bool flag = true;
+			for (int k = 0; k < 7; ++k)
+			{
+				if (facultyNumbers[i][k] != tempFacultyNumber[k])
+				{
+					flag = false;
+					break;
+				}
+			}
+			if (flag == true)
+			{
+				mySwap(studentsInformation[i], studentsInformation[j]);
+				break;
+			}
+		}
+	}
+}
+
+void rememberInformationFromFile(const std::string fileName, char** studentsInformation, char** facultyNumbers, const int linesCount)
+{
+	std::fstream groupFile;
+	groupFile.open(fileName, std::ios::in);
+	if (groupFile.is_open())
+	{
+		for (int i = 0; i < linesCount; ++i)
+		{
+			groupFile.getline(studentsInformation[i], 200);
+			getFacultyNumber(studentsInformation[i], facultyNumbers[i]);
+		}
+		groupFile.close();
+	}
+}
+
+void sortByFacultyNumber(const int group, const char wayToSort)
+{
+	std::string fileName;
+	switch (group)
+	{
+	case 1:
+		fileName = "firstGroup.txt";
+		break;
+	case 2:
+		fileName = "secondGroup.txt";
+		break;
+	case 3:
+		fileName = "thirdGroup.txt";
+		break;
+	case 4:
+		fileName = "fourthGroup.txt";
+		break;
+	case 5:
+		fileName = "fifthGroup.txt";
+		break;
+	case 6:
+		fileName = "sixthGroup.txt";
+		break;
+	case 7:
+		fileName = "seventhGroup.txt";
+		break;
+	case 8:
+		fileName = "eighthGroup.txt";
+		break;
+	}
+
+	std::string fileName = "second.txt";
+	int linesCount = getLinesCount(fileName);
+	char** studentsInformation = new char* [linesCount];
+	char** facultyNumbers = new char* [linesCount];
+	for (int i = 0; i < linesCount; ++i)
+	{
+		studentsInformation[i] = new char[200];
+		facultyNumbers[i] = new char[7];
+	}
+
+	rememberInformationFromFile(fileName, studentsInformation, facultyNumbers, linesCount);
+	selectionSortFacultyNumbers(facultyNumbers, linesCount, wayToSort);
+	sortInformation(studentsInformation, facultyNumbers, linesCount);
+
+	std::fstream groupFile;
+	groupFile.open(fileName, std::ios::out);
+	if (groupFile.is_open())
+	{
+		for (int i = 0; i < linesCount; ++i)
+		{
+			for (int j = 0; studentsInformation[i][j] != '\0'; ++j)
+			{
+				groupFile << studentsInformation[i][j];
+			}
+			groupFile << std::endl;
+		}
+		groupFile.close();
+	}
+
+	for (int i = 0; i < linesCount; ++i)
+	{
+		delete[]studentsInformation[i];
+		delete[]facultyNumbers[i];
+	}
+	delete[]studentsInformation;
+	delete[]facultyNumbers;
+}
+
 void sortStudents(const int group)
 {
 	std::cout << "Sort by average success or faculty number (please write 'a' for average success and 'f' for faculty number): ";
@@ -215,13 +406,7 @@ void sortStudents(const int group)
 		}
 		break;
 	case 'f':
-		switch (wayToSort)
-		{
-		case 'a':
-			break;
-		case 'd':
-			break;
-		}
+		sortByFacultyNumber(group, wayToSort);
 		break;
 	}
 

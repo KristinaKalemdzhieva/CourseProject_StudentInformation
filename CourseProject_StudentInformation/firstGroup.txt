@@ -1,6 +1,5 @@
-Krasimira Aleksandrova Vaytalova 0242184 Algebra 4.90 Geometry 5.20
-Ludmila Damyanova Naumova 0643391 Geometry 4.56
-Tihomir Samuilov Stefanov 0178212 DIS1 5.92 UP 5.30
-Emiliya Petrova Kazakov 0693947 DSTR1 3.27 DSTR2 4.50
-Temenuzhka Vasileva Genova 0131626 UP 5.78 English 6.00
-Angel Angelov Angelov 0271279 English 5.79 
+Ivailo Markov Minchev 0111111 UP 6.0
+Poli Hristova Genova 0451638 English 5.30
+Lora Petrova Hristova 0232471 English 5.5 
+Lili Markova Asenova 0985473 English 6.0
+Kosta Ivanov Avramikov 0123452 Geography 4.50
