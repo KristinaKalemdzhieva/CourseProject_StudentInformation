@@ -622,9 +622,170 @@ void groupMenu(const int group)
 	}
 }
 
+int getLinesCountFromVariousGroups(const int groupsCount, const int* groups)
+{
+	int allfilesLinesCount = 0;
+	for (int i = 0; i < groupsCount; ++i)
+	{
+		int linesCount = 0;
+		switch (groups[i])
+		{
+		case 1:
+			linesCount = getLinesCount("firstGroup.txt");
+			break;
+		case 2:
+			linesCount = getLinesCount("secondGroup.txt");
+			break;
+		case 3:
+			linesCount = getLinesCount("thirdGroup.txt");
+			break;
+		case 4:
+			linesCount = getLinesCount("fourthGroup.txt");
+			break;
+		case 5:
+			linesCount = getLinesCount("fifthGroup.txt");
+			break;
+		case 6:
+			linesCount = getLinesCount("sixthGroup.txt");
+			break;
+		case 7:
+			linesCount = getLinesCount("seventhGroup.txt");
+			break;
+		case 8:
+			linesCount = getLinesCount("eighthGroup.txt");
+			break;
+		}
+		allfilesLinesCount += linesCount;
+	}
+	return allfilesLinesCount;
+}
+
+void rememberInformationFromVariousGroups(const int n, const int* groups, char** studentsInformation, char** facultyNumbers, double* averageSuccesses, const int allFilesLinesCount)
+{
+	std::string fileName;
+	int index = 0;
+	int temp = 0;
+	for (int i = 0; i < n; ++i)
+	{
+		switch (groups[i])
+		{
+		case 1:
+			fileName = "firstGroup.txt";
+			break;
+		case 2:
+			fileName = "secondGroup.txt";
+			break;
+		case 3:
+			fileName = "thirdGroup.txt";
+			break;
+		case 4:
+			fileName = "fourthGroup.txt";
+			break;
+		case 5:
+			fileName = "fifthGroup.txt";
+			break;
+		case 6:
+			fileName = "sixthGroup.txt";
+			break;
+		case 7:
+			fileName = "seventhGroup.txt";
+			break;
+		case 8:
+			fileName = "eighthGroup.txt";
+			break;
+		}
+	
+		std::fstream groupFile;
+		groupFile.open(fileName, std::ios::in);
+		if (groupFile.is_open())
+		{
+			while (groupFile.getline(studentsInformation[index], 250))
+			{
+				getFacultyNumber(studentsInformation[i], facultyNumbers[i]);
+				++index;
+			}
+		}
+		groupFile.close();
+
+		double* tempAverageSuccesses = new double[index - temp];
+		getAverageSuccess(fileName, tempAverageSuccesses, (index - temp));
+		//int j = 0;
+		for (int i = temp, j = 0; i < index; ++i, ++j)
+		{
+			averageSuccesses[i] = tempAverageSuccesses[j];
+		}
+		temp = index;
+		delete[]tempAverageSuccesses;
+	}
+}
+
 void printStudentsFromVariousGroups()
 {
+	std::cout << "Please, enter the count of the groups: ";
+	int n;
+	std::cin >> n;
+	std::cout << std::endl;
+
+	std::cout << "Enter groups (please enter the numbers of the groups separated by spaces): ";
+	int* groups = new int[n];
+	for (int i = 0; i < n; ++i)
+	{
+		std::cin >> groups[i];
+	}
+	std::cout << std::endl;
+
+	std::cout << "Sort by average success or faculty number (please write 'a' for average success and 'f' for faculty number): ";
+	char sortBy;
+	std::cin >> sortBy;
+	std::cout << std::endl;
+
+	std::cout << "Sort in ascending/descending order (please write 'a' for ASC and 'd' for DESC): ";
+	char wayToSort;
+	std::cin >> wayToSort;
+	std::cout << std::endl;
+
+	int allFilesLinesCount = getLinesCountFromVariousGroups(n, groups);
+
+	char** studentsInformation = new char* [allFilesLinesCount];
+	char** facultyNumbers = new char* [allFilesLinesCount];
+	double* averageSuccesses = new double[allFilesLinesCount];
+	for (int i = 0; i < allFilesLinesCount; ++i)
+	{
+		studentsInformation[i] = new char[250];
+		facultyNumbers[i] = new char[7];
+	}
 	
+	rememberInformationFromVariousGroups(n, groups, studentsInformation, facultyNumbers, averageSuccesses, allFilesLinesCount);
+
+	switch (sortBy)
+	{
+	case 'a':
+		sortInformationByAverageSuccesses(averageSuccesses, studentsInformation, allFilesLinesCount, wayToSort);
+		break;
+	case 'f':
+		selectionSortFacultyNumbers(facultyNumbers, studentsInformation, allFilesLinesCount, wayToSort);
+		break;
+	}
+
+	for (int i = 0; i < allFilesLinesCount; ++i)
+	{
+		for (int j = 0; studentsInformation[i][j] != '\0'; ++j)
+		{
+			std::cout << studentsInformation[i][j];
+		}
+		std::cout << std::endl;
+	}
+
+	for (int i = 0; i < 200; ++i)
+	{
+		delete[]studentsInformation[i];
+	}
+	delete[]studentsInformation;
+	delete[]facultyNumbers;
+	delete[]averageSuccesses;
+	delete[]groups;
+
+	mainMenu();
 }
 
 void mainMenu()
