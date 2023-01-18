@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 
 void mainMenu();
 
@@ -219,12 +220,19 @@ void myStrCpy(char* a, char* b)
 	b[index] = '\0';
 }
 
-void mySwap(char* a, char* b)
+void mySwapCharArrays(char* a, char* b)
 {
 	char temp[7];
 	myStrCpy(a, temp);
 	myStrCpy(b, a);
 	myStrCpy(temp, b);
+}
+
+void mySwapDoubleArrays(double& a, double& b)
+{
+	double temp = a;
+	a = b;
+	b = temp;
 }
 
 int myStrCmp(const char* a, const char* b)
@@ -238,7 +246,7 @@ int myStrCmp(const char* a, const char* b)
 	return a[index] - b[index];
 }
 
-void selectionSortFacultyNumbers(char** facultyNumbers, const int size, const char wayToSort)
+void selectionSortFacultyNumbers(char** facultyNumbers, char** studentsInformation, const int size, const char wayToSort)
 {
 	if (wayToSort == 'a') 
 	{
@@ -252,7 +260,8 @@ void selectionSortFacultyNumbers(char** facultyNumbers, const int size, const ch
 					indexOfMaxElement = j;
 				}
 			}
-			mySwap(facultyNumbers[i], facultyNumbers[indexOfMaxElement]);
+			mySwapCharArrays(facultyNumbers[i], facultyNumbers[indexOfMaxElement]);
+			mySwapCharArrays(studentsInformation[i], studentsInformation[indexOfMaxElement]);
 		}
 	}
 	else
@@ -267,38 +276,60 @@ void selectionSortFacultyNumbers(char** facultyNumbers, const int size, const ch
 					indexOfMinElement = j;
 				}
 			}
-			mySwap(facultyNumbers[i], facultyNumbers[indexOfMinElement]);
+			mySwapCharArrays(facultyNumbers[i], facultyNumbers[indexOfMinElement]);
+			mySwapCharArrays(studentsInformation[i], studentsInformation[indexOfMinElement]);
 		}
 	}
 }
 
-void sortInformation(char** studentsInformation, char** facultyNumbers, const int linesCount)
+void getAverageSuccess(const std::string fileName, double* averageSuccesses, const int linesCount)
 {
-	for (int i = 0; i < linesCount; ++i) //obhojdame facultetnite nomera
+	std::fstream groupFile;
+	groupFile.open(fileName, std::ios::in);
+	if (groupFile.is_open())
 	{
-		for (int j = 0; j < linesCount; ++j) //obhojdame facultetnite nomera v obshtata ingormaciq
+		for (int i = 0; i < linesCount; ++i)
 		{
-			char tempFacultyNumber[7]; // pazi fac number na segashniq red
-			getFacultyNumber(studentsInformation[j], tempFacultyNumber);
-			bool flag = true;
-			for (int k = 0; k < 7; ++k)
+			char name[25];
+			char secondName[30];
+			char lastName[35];
+			char facultyNumber[7];
+			groupFile >> name >> secondName >> lastName >> facultyNumber;
+
+			std::string line;
+			getline(groupFile, line);
+			std::stringstream helper(line);
+
+			char discipline[15];
+			double sum = 0;
+			double count = 0;
+			double grade = 0;
+			while (helper >> discipline >> grade)
 			{
-				if (facultyNumbers[i][k] != tempFacultyNumber[k])
-				{
-					flag = false;
-					break;
-				}
+				sum += grade;
+				++count;
 			}
-			if (flag == true)
-			{
-				mySwap(studentsInformation[i], studentsInformation[j]);
-				break;
-			}
+			averageSuccesses[i] = sum / count;
 		}
+		groupFile.close();
 	}
 }
 
-void rememberInformationFromFile(const std::string fileName, char** studentsInformation, char** facultyNumbers, const int linesCount)
+void rememberInformationFromFile(const std::string fileName, char** studentsInformation, const int linesCount)
+{
+	std::fstream groupFile;
+	groupFile.open(fileName, std::ios::in);
+	if (groupFile.is_open())
+	{
+		for (int i = 0; i < linesCount; ++i)
+		{
+			groupFile.getline(studentsInformation[i], 200);
+		}
+		groupFile.close();
+	}
+}
+
+void rememberFacultyNumbersAndInformationFromFile(const std::string fileName, char** studentsInformation, char** facultyNumbers, const int linesCount)
 {
 	std::fstream groupFile;
 	groupFile.open(fileName, std::ios::in);
@@ -311,6 +342,109 @@ void rememberInformationFromFile(const std::string fileName, char** studentsInfo
 		}
 		groupFile.close();
 	}
+}
+
+void sortInformationByAverageSuccesses(double* averageSuccesses, char** studentsInformation, const int size, const char wayToSort)
+{
+	if (wayToSort == 'a')
+	{
+		for (int i = 0; i < size - 1; ++i)
+		{
+			int indexOfMinElement = i;
+			for (int j = i + 1; j < size; ++j)
+			{
+				if (averageSuccesses[j] < averageSuccesses[indexOfMinElement])
+				{
+					indexOfMinElement = j;
+				}
+			}
+			mySwapDoubleArrays(averageSuccesses[i], averageSuccesses[indexOfMinElement]);
+			mySwapCharArrays(studentsInformation[i], studentsInformation[indexOfMinElement]);
+		}
+	}
+	else
+	{
+		for (int i = 0; i < size - 1; ++i)
+		{
+			int indexOfMaxElement = i;
+			for (int j = i + 1; j < size; ++j)
+			{
+				if (averageSuccesses[j] > averageSuccesses[indexOfMaxElement])
+				{
+					indexOfMaxElement = j;
+				}
+			}
+			mySwapDoubleArrays(averageSuccesses[i], averageSuccesses[indexOfMaxElement]);
+			mySwapCharArrays(studentsInformation[i], studentsInformation[indexOfMaxElement]);
+		}
+	}
+}
+
+
+void sortByAverageSuccess(const int group, const char wayToSort)
+{
+	std::string fileName;
+	switch (group)
+	{
+	case 1:
+		fileName = "firstGroup.txt";
+		break;
+	case 2:
+		fileName = "secondGroup.txt";
+		break;
+	case 3:
+		fileName = "thirdGroup.txt";
+		break;
+	case 4:
+		fileName = "fourthGroup.txt";
+		break;
+	case 5:
+		fileName = "fifthGroup.txt";
+		break;
+	case 6:
+		fileName = "sixthGroup.txt";
+		break;
+	case 7:
+		fileName = "seventhGroup.txt";
+		break;
+	case 8:
+		fileName = "eighthGroup.txt";
+		break;
+	}
+
+	int linesCount = getLinesCount(fileName);
+	char** studentsInformation = new char* [linesCount];
+	double* averageSuccesses = new double[linesCount];
+	for (int i = 0; i < linesCount; ++i)
+	{
+		studentsInformation[i] = new char[200];
+	}
+
+	getAverageSuccess(fileName, averageSuccesses, linesCount);
+	rememberInformationFromFile(fileName, studentsInformation, linesCount);
+	sortInformationByAverageSuccesses(averageSuccesses, studentsInformation, linesCount, wayToSort);
+
+	std::fstream groupFile;
+	groupFile.open(fileName, std::ios::out);
+	if (groupFile.is_open())
+	{
+		for (int i = 0; i < linesCount; ++i)
+		{
+			for (int j = 0; studentsInformation[i][j] != '\0'; ++j)
+			{
+				groupFile << studentsInformation[i][j];
+			}
+			groupFile << std::endl;
+		}
+		groupFile.close();
+	}
+
+	for (int i = 0; i < linesCount; ++i)
+	{
+		delete[]studentsInformation[i];
+	}
+	delete[]studentsInformation;
+	delete[]averageSuccesses;
 }
 
 void sortByFacultyNumber(const int group, const char wayToSort)
@@ -344,7 +478,6 @@ void sortByFacultyNumber(const int group, const char wayToSort)
 		break;
 	}
 
-	std::string fileName = "second.txt";
 	int linesCount = getLinesCount(fileName);
 	char** studentsInformation = new char* [linesCount];
 	char** facultyNumbers = new char* [linesCount];
@@ -354,9 +487,8 @@ void sortByFacultyNumber(const int group, const char wayToSort)
 		facultyNumbers[i] = new char[7];
 	}
 
-	rememberInformationFromFile(fileName, studentsInformation, facultyNumbers, linesCount);
-	selectionSortFacultyNumbers(facultyNumbers, linesCount, wayToSort);
-	sortInformation(studentsInformation, facultyNumbers, linesCount);
+	rememberFacultyNumbersAndInformationFromFile(fileName, studentsInformation, facultyNumbers, linesCount);
+	selectionSortFacultyNumbers(facultyNumbers, studentsInformation, linesCount, wayToSort);
 
 	std::fstream groupFile;
 	groupFile.open(fileName, std::ios::out);
@@ -397,13 +529,7 @@ void sortStudents(const int group)
 	switch (sortBy)
 	{
 	case 'a':
-		switch (wayToSort)
-		{
-		case 'a':
-			break;
-		case 'd':
-			break;
-		}
+		sortByAverageSuccess(group, wayToSort);
 		break;
 	case 'f':
 		sortByFacultyNumber(group, wayToSort);
@@ -498,35 +624,7 @@ void groupMenu(const int group)
 
 void printStudentsFromVariousGroups()
 {
-	std::cout << "Enter groups (please enter the numbers of the groups separated by spaces): ";
-	char groups[15];
-	std::cin.getline(groups, 15);
-	std::cout << std::endl;
-
-	for (int i = 0; groups[i] != '\0'; ++i)
-	{
-		switch (groups[i])
-		{
-		case '1':
-			break;
-		case '2':
-			break;
-		case '3':
-			break;
-		case '4':
-			break;
-		case '5':
-			break;
-		case '6':
-			break;
-		case '7':
-			break;
-		case '8':
-			break;
-		}
-	}
-
-	mainMenu();
+	
 }
 
 void mainMenu()
