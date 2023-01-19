@@ -622,51 +622,12 @@ void groupMenu(const int group)
 	}
 }
 
-int getLinesCountFromVariousGroups(const int groupsCount, const int* groups)
+int getLinesCountFromVariousGroupsAndRememberInformation(const int groupsCount, const int* groups, char** studentsInformation, char** facultyNumbers, double* averageSuccesses)
 {
-	int allfilesLinesCount = 0;
+	int index = 0;
 	for (int i = 0; i < groupsCount; ++i)
 	{
-		int linesCount = 0;
-		switch (groups[i])
-		{
-		case 1:
-			linesCount = getLinesCount("firstGroup.txt");
-			break;
-		case 2:
-			linesCount = getLinesCount("secondGroup.txt");
-			break;
-		case 3:
-			linesCount = getLinesCount("thirdGroup.txt");
-			break;
-		case 4:
-			linesCount = getLinesCount("fourthGroup.txt");
-			break;
-		case 5:
-			linesCount = getLinesCount("fifthGroup.txt");
-			break;
-		case 6:
-			linesCount = getLinesCount("sixthGroup.txt");
-			break;
-		case 7:
-			linesCount = getLinesCount("seventhGroup.txt");
-			break;
-		case 8:
-			linesCount = getLinesCount("eighthGroup.txt");
-			break;
-		}
-		allfilesLinesCount += linesCount;
-	}
-	return allfilesLinesCount;
-}
-
-void rememberInformationFromVariousGroups(const int n, const int* groups, char** studentsInformation, char** facultyNumbers, double* averageSuccesses, const int allFilesLinesCount)
-{
-	std::string fileName;
-	int index = 0;
-	int temp = 0;
-	for (int i = 0; i < n; ++i)
-	{
+		std::string fileName;
 		switch (groups[i])
 		{
 		case 1:
@@ -694,29 +655,40 @@ void rememberInformationFromVariousGroups(const int n, const int* groups, char**
 			fileName = "eighthGroup.txt";
 			break;
 		}
-	
-		std::fstream groupFile;
-		groupFile.open(fileName, std::ios::in);
-		if (groupFile.is_open())
-		{
-			while (groupFile.getline(studentsInformation[index], 250))
-			{
-				getFacultyNumber(studentsInformation[i], facultyNumbers[i]);
-				++index;
-			}
-		}
-		groupFile.close();
 
-		double* tempAverageSuccesses = new double[index - temp];
-		getAverageSuccess(fileName, tempAverageSuccesses, (index - temp));
-		//int j = 0;
-		for (int i = temp, j = 0; i < index; ++i, ++j)
+		int linesCount = getLinesCount(fileName);
+		char** tempStudentsInformation = new char* [linesCount];
+		double* tempAverageSuccesses = new double[linesCount];
+		for (int i = 0; i < linesCount; ++i)
 		{
-			averageSuccesses[i] = tempAverageSuccesses[j];
+			tempStudentsInformation[i] = new char[250];
 		}
-		temp = index;
+
+		getAverageSuccess(fileName, tempAverageSuccesses, linesCount);
+		rememberInformationFromFile(fileName, tempStudentsInformation, linesCount);
+
+		for (int i = 0; i < linesCount; ++i)
+		{
+			getFacultyNumber(tempStudentsInformation[i], facultyNumbers[index]);
+			averageSuccesses[index] = tempAverageSuccesses[i];
+
+			int j = 0;
+			for (; tempStudentsInformation[i][j] != '\0'; ++j)
+			{
+				studentsInformation[index][j] = tempStudentsInformation[i][j];
+			}
+			studentsInformation[index][j] = '\0';
+			++index;
+		}
+
+		for (int i = 0; i < linesCount; ++i)
+		{
+			delete[]tempStudentsInformation[i];
+		}
+		delete[]tempStudentsInformation;
 		delete[]tempAverageSuccesses;
 	}
+	return index;
 }
 
 void printStudentsFromVariousGroups()
@@ -744,18 +716,16 @@ void printStudentsFromVariousGroups()
 	std::cin >> wayToSort;
 	std::cout << std::endl;
 
-	int allFilesLinesCount = getLinesCountFromVariousGroups(n, groups);
-
-	char** studentsInformation = new char* [allFilesLinesCount];
-	char** facultyNumbers = new char* [allFilesLinesCount];
-	double* averageSuccesses = new double[allFilesLinesCount];
-	for (int i = 0; i < allFilesLinesCount; ++i)
+	char** studentsInformation = new char* [200];
+	char** facultyNumbers = new char* [200];
+	double* averageSuccesses = new double[200];
+	for (int i = 0; i < 200; ++i)
 	{
 		studentsInformation[i] = new char[250];
 		facultyNumbers[i] = new char[7];
 	}
-	
-	rememberInformationFromVariousGroups(n, groups, studentsInformation, facultyNumbers, averageSuccesses, allFilesLinesCount);
+
+	int allFilesLinesCount = getLinesCountFromVariousGroupsAndRememberInformation(n, groups, studentsInformation, facultyNumbers, averageSuccesses);
 
 	switch (sortBy)
 	{
@@ -775,10 +745,16 @@ void printStudentsFromVariousGroups()
 		}
 		std::cout << std::endl;
 	}
+	std::cout << std::endl;
 
-	for (int i = 0; i < 200; ++i)
+	for (int i = 0; i < allFilesLinesCount; ++i)
 	{
 		delete[]studentsInformation[i];
+
+		if (i < 7)
+		{
+			delete[]facultyNumbers[i];
+		}
 	}
 	delete[]studentsInformation;
 	delete[]facultyNumbers;
