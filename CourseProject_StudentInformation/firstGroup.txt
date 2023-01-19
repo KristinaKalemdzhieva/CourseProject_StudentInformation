@@ -1,5 +1,6 @@
-Lora Petrova Hristova 0232471 English 5.5 bio 5.59
-Poli Hristova Genova 0451638 English 5.30 up 4.60
-Ivailo Markov Minchev 0111111 UP 6.0 bio 3.30
+Ivan Ivanov Mitev 0765463 Algebra 3.3 English 4.3 
 Lili Markova Asenova 0985473 English 6.0 ae 3.20
-Kosta Ivanov Avramikov 0123452 Geography 4.50 chemistry 3.60
+Ivailo Markov Minchev 0111111 UP 6.0 bio 3.30
+Kristina Rosenova Kalemdzhieva 0546271 Biology 3.4 Chemistry 3.1 English 6 Bulgarian 5.45 Art 5.79 
+Poli Hristova Genova 0451638 English 5.30 up 4.60
+Lora Petrova Hristova 0232471 English 5.5 bio 5.59

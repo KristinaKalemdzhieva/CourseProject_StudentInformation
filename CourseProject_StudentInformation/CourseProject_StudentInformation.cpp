@@ -33,16 +33,15 @@ void enterStudent(const int group)
 	int n;
 	std::cin >> n;
 	std::cout << std::endl;
+
 	char **disciplines = new char*[10];
 	double marks[10];
 	for (int i = 0; i < n; ++i)
 	{
 		disciplines[i] = new char[10];
-		char discipline[10];
 
 		std::cout << "Discipline: ";
-		std::cin >> discipline;
-		disciplines[i] = discipline;
+		std::cin >> disciplines[i];
 		std::cout << std::endl;
 
 		std::cout << "Mark: ";
@@ -591,11 +590,18 @@ void printStudents(const int group)
 
 void groupMenu(const int group)
 {
-	std::cout << "1. Enter student" << std::endl;
-	std::cout << "2. Unsubscribe student" << std::endl;
-	std::cout << "3. Sort Students" << std::endl;
-	std::cout << "4. Print list of the students" << std::endl;
-	std::cout << "5. Back" << std::endl << std::endl;
+	std::cout << "__________________________________________" << std::endl;
+	std::cout << "                   __" << std::endl;
+	std::cout << "           |\\  /| |__ |\\ | |  |" << std::endl;
+	std::cout << "           | \\/ | |__ | \\| |__| " << std::endl;
+	std::cout << "            --- G R O U P ---" << std::endl;
+	std::cout << "__________________________________________" << std::endl << std::endl;
+
+	std::cout << "          1. Enter student" << std::endl;
+	std::cout << "          2. Unsubscribe student" << std::endl;
+	std::cout << "          3. Sort Students" << std::endl;
+	std::cout << "          4. Print list of the students" << std::endl;
+	std::cout << "          5. Back" << std::endl << std::endl;
 
 	std::cout << "Choose a number: ";
 	int n;
@@ -766,16 +772,26 @@ void printStudentsFromVariousGroups()
 
 void mainMenu()
 {
-	std::cout << "1. First Group Menu" << std::endl;
-	std::cout << "2. Second Group Menu" << std::endl;
-	std::cout << "3. Third Group Menu" << std::endl;
-	std::cout << "4. Fourth Group Menu" << std::endl;
-	std::cout << "5. Fifth Group Menu" << std::endl;
-	std::cout << "6. Sixth Group Menu" << std::endl;
-	std::cout << "7. Seventh Group Menu" << std::endl;
-	std::cout << "8. Eigth Group Menu" << std::endl;
-	std::cout << "9. Print student information for more than one group" << std::endl;
-	std::cout << "10. Exit" << std::endl << std::endl;
+	std::cout << "__________________________________________" << std::endl << std::endl;
+	std::cout << " -----STUDENTS INFORMATION MANAGMENT-----" << std::endl;
+	std::cout << "__________________________________________" << std::endl;
+	std::cout << "   ___    ___   ____   __    _   _    _ " << std::endl;
+	std::cout << "  |   \\  /   | | ___| |  \\  | | | |  | |" << std::endl;
+	std::cout << "  | |\\ \\/ /| | | |__  | |\\\\ | | | |  | | " << std::endl;
+	std::cout << "  | | \\__/ | | | |__  | | \\\\| | | |__| | " << std::endl;
+	std::cout << "  |_|      |_| |____| |_|  \\__| |______|" << std::endl;
+	std::cout << "__________________________________________" << std::endl << std::endl;
+
+	std::cout << "          1. First Group Menu" << std::endl;
+	std::cout << "          2. Second Group Menu" << std::endl;
+	std::cout << "          3. Third Group Menu" << std::endl;
+	std::cout << "          4. Fourth Group Menu" << std::endl;
+	std::cout << "          5. Fifth Group Menu" << std::endl;
+	std::cout << "          6. Sixth Group Menu" << std::endl;
+	std::cout << "          7. Seventh Group Menu" << std::endl;
+	std::cout << "          8. Eigth Group Menu" << std::endl;
+	std::cout << "          9. Print student information for more than one group" << std::endl;
+	std::cout << "         10. Exit" << std::endl << std::endl;
 
 	std::cout << "Choose a number: ";
 	int n;
@@ -812,7 +828,7 @@ void mainMenu()
 		printStudentsFromVariousGroups();
 		break;
 	case 10:
-		std::cout << "Have a nice day! :)" << std::endl;
+		std::cout << "    H A V E   A   N I C E   D A Y  ! :)" << std::endl;
 		return;
 		break;
 	}
