@@ -1,5 +1,5 @@
-Kamen Todorov Grigorov 0951250 English 5.38 OOP 4.50
-Jordan Jonkov Tachev 0770489 SDA 3.33 Algebra 5.10
-Ralitsa Stoyanova Kapudzhieva 0783995 DIS1 4.79
-Ognyan Stoilov Filipov 0088935 DIS1 3.90 UP 4.76
+Kamen Todorov Grigorov 0951250 English 5.38 History 4.50
+Ralitsa Stoyanova Kapudzhieva 0783995 Geometry 4.79
+Jordan Jonkov Tachev 0770489 Informatics 3.33 Algebra 5.10
 Ginka Krasimirova Pencheva 0126279 Geometry 6.00
+Ognyan Stoilov Filipov 0088935 English 3.90 Physics 4.76

@@ -1,6 +1,7 @@
-Stefan Minkov Ignatov 0717518 Geometry 3.38 OOP 5.68 DIS2 4.53 DSTR2 3.91
-Simona Raycheva Bogdanova 0129874 English 5.62 DIS2 4.99
-Evlogy Grigorov Hristev 0290686 DIS1 3.12 DSTR1 5.27 Algebra 5.13
-Emanuil Krumov Dobrev 0759235 UP 4.47 OOP 3.87 English 4.50
+Emanuil Krumov Dobrev 0759235 Informatics 4.47 Algebra 3.87 English 4.50
+Stefan Minkov Ignatov 0717518 Geometry 3.38 English 5.68 Physics 4.53 Algebra 3.91
+Evlogy Grigorov Hristev 0290686 Biology 3.12 Chemistry 5.27 Algebra 5.13
+Hristo Todorov Kostadinov 0907065 Geometry 3.7 Informatics 5.55
+Ivan Hristov Kodzhakolev 0546372 Biology 4.6 Chemistry 5.2 Arts 6 Physics 3.2 History 5.15 Geography 5.25 Algebra 3.4 
 Donka Stefanova Stoyanova 0902532 Algebra 5.40 Geometry 5.07
-Hristo Todorov Kostadinov 0907065 DIS2 3.7 DIS2 5.55 
+Simona Raycheva Bogdanova 0129874 English 5.62 History 4.99

@@ -1,5 +1,7 @@
-Aneliya Rosenova Ivankova 0932073 DSTR2 4.48
-Zornitsa Filipova Chavdarova 0623687 UP 5.74
-Ventsislav Evlogy Genov 0242186 Algebra 5.06 DIS1 5.86 UP 5.22 DSTR1 3.84 Englis 5.00
-Marin Kirilov Kiryakov 0300664 UP 5.99 English 6.00
-Miroslava Zhivkova Ilieva 0842155 DIS1 5.30 DSTR1 3.41
+Ventsislav Evlogy Genov 0242186 Algebra 5.06 Geometry 5.86 Informatics 5.22 Biology 3.84 English 5.00
+Marin Kirilov Kiryakov 0300664 Informatics 5.99 English 6.00
+Grigor Ivanov Dimitrov 04322256 Biology 3.3 Chemistry 4.7 
+Zornitsa Filipova Chavdarova 0623687 Informatics 5.74
+Spas Valentinov Antimov 0657333 English 4.89 Algebra 5.7 Geometry 4.25 
+Miroslava Zhivkova Ilieva 0842155 Algebra 5.30 Geometry 3.41
+Aneliya Rosenova Ivankova 0932073 English 4.48

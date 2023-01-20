@@ -20,7 +20,7 @@ void enterStudent(const int group)
 	std::cout << std::endl;
 
 	std::cout << "Last name: ";
-	char lastName[25];
+	char lastName[30];
 	std::cin >> lastName;
 	std::cout << std::endl;
 
@@ -34,11 +34,11 @@ void enterStudent(const int group)
 	std::cin >> n;
 	std::cout << std::endl;
 
-	char **disciplines = new char*[10];
+	char **disciplines = new char*[n];
 	double marks[10];
 	for (int i = 0; i < n; ++i)
 	{
-		disciplines[i] = new char[10];
+		disciplines[i] = new char[15];
 
 		std::cout << "Discipline: ";
 		std::cin >> disciplines[i];
@@ -90,7 +90,12 @@ void enterStudent(const int group)
 		groupFile << std::endl;
 		groupFile.close();
 	}
-	delete[] disciplines;
+
+	for (int i = 0; i < n; ++i)
+	{
+		delete[]disciplines[i];
+	}
+	delete[]disciplines;
 
 	groupMenu(group);
 }
@@ -155,8 +160,8 @@ void unsubscribeStudent(const int group)
 
 	if (groupFile.is_open() && tempFile.is_open())
 	{
-		char line[100];
-		while (groupFile.getline(line, 100))
+		char line[250];
+		while (groupFile.getline(line, 250))
 		{
 			char facultyNumberCurrentLine[7];
 			getFacultyNumber(line, facultyNumberCurrentLine);
@@ -198,8 +203,8 @@ int getLinesCount(const std::string fileName)
 	int count = 0;
 	if (myFile.is_open())
 	{
-		char line[100];
-		while (myFile.getline(line, 100))
+		char line[250];
+		while (myFile.getline(line, 250))
 		{
 			++count;
 		}
@@ -251,32 +256,32 @@ void selectionSortFacultyNumbers(char** facultyNumbers, char** studentsInformati
 	{
 		for (int i = 0; i < size - 1; ++i)
 		{
-			int indexOfMaxElement = i;
-			for (int j = i + 1; j < size; ++j)
-			{
-				if (myStrCmp(facultyNumbers[indexOfMaxElement], facultyNumbers[j]) > 0)
-				{
-					indexOfMaxElement = j;
-				}
-			}
-			mySwapCharArrays(facultyNumbers[i], facultyNumbers[indexOfMaxElement]);
-			mySwapCharArrays(studentsInformation[i], studentsInformation[indexOfMaxElement]);
-		}
-	}
-	else
-	{
-		for (int i = 0; i < size - 1; ++i)
-		{
 			int indexOfMinElement = i;
 			for (int j = i + 1; j < size; ++j)
 			{
-				if (myStrCmp(facultyNumbers[indexOfMinElement], facultyNumbers[j]) < 0)
+				if (myStrCmp(facultyNumbers[indexOfMinElement], facultyNumbers[j]) > 0)
 				{
 					indexOfMinElement = j;
 				}
 			}
 			mySwapCharArrays(facultyNumbers[i], facultyNumbers[indexOfMinElement]);
 			mySwapCharArrays(studentsInformation[i], studentsInformation[indexOfMinElement]);
+		}
+	}
+	else
+	{
+		for (int i = 0; i < size - 1; ++i)
+		{
+			int indexOfMaxElement = i;
+			for (int j = i + 1; j < size; ++j)
+			{
+				if (myStrCmp(facultyNumbers[indexOfMaxElement], facultyNumbers[j]) < 0)
+				{
+					indexOfMaxElement = j;
+				}
+			}
+			mySwapCharArrays(facultyNumbers[i], facultyNumbers[indexOfMaxElement]);
+			mySwapCharArrays(studentsInformation[i], studentsInformation[indexOfMaxElement]);
 		}
 	}
 }
@@ -289,9 +294,9 @@ void getAverageSuccess(const std::string fileName, double* averageSuccesses, con
 	{
 		for (int i = 0; i < linesCount; ++i)
 		{
-			char name[25];
-			char secondName[30];
-			char lastName[35];
+			char name[20];
+			char secondName[25];
+			char lastName[30];
 			char facultyNumber[7];
 			groupFile >> name >> secondName >> lastName >> facultyNumber;
 
@@ -322,7 +327,7 @@ void rememberInformationFromFile(const std::string fileName, char** studentsInfo
 	{
 		for (int i = 0; i < linesCount; ++i)
 		{
-			groupFile.getline(studentsInformation[i], 200);
+			groupFile.getline(studentsInformation[i], 250);
 		}
 		groupFile.close();
 	}
@@ -336,7 +341,7 @@ void rememberFacultyNumbersAndInformationFromFile(const std::string fileName, ch
 	{
 		for (int i = 0; i < linesCount; ++i)
 		{
-			groupFile.getline(studentsInformation[i], 200);
+			groupFile.getline(studentsInformation[i], 250);
 			getFacultyNumber(studentsInformation[i], facultyNumbers[i]);
 		}
 		groupFile.close();
@@ -416,7 +421,7 @@ void sortByAverageSuccess(const int group, const char wayToSort)
 	double* averageSuccesses = new double[linesCount];
 	for (int i = 0; i < linesCount; ++i)
 	{
-		studentsInformation[i] = new char[200];
+		studentsInformation[i] = new char[250];
 	}
 
 	getAverageSuccess(fileName, averageSuccesses, linesCount);
@@ -482,7 +487,7 @@ void sortByFacultyNumber(const int group, const char wayToSort)
 	char** facultyNumbers = new char* [linesCount];
 	for (int i = 0; i < linesCount; ++i)
 	{
-		studentsInformation[i] = new char[200];
+		studentsInformation[i] = new char[250];
 		facultyNumbers[i] = new char[7];
 	}
 
@@ -575,8 +580,8 @@ void printStudents(const int group)
 	groupFile.open(fileName, std::ios::in);
 	if (groupFile.is_open())
 	{
-		char line[100];
-		while (groupFile.getline(line, 100))
+		char line[250];
+		while (groupFile.getline(line, 250))
 		{
 			std::cout << line << std::endl;
 		}
@@ -753,14 +758,10 @@ void printStudentsFromVariousGroups()
 	}
 	std::cout << std::endl;
 
-	for (int i = 0; i < allFilesLinesCount; ++i)
+	for (int i = 0; i < 200; ++i)
 	{
 		delete[]studentsInformation[i];
-
-		if (i < 7)
-		{
-			delete[]facultyNumbers[i];
-		}
+		delete[]facultyNumbers[i];
 	}
 	delete[]studentsInformation;
 	delete[]facultyNumbers;

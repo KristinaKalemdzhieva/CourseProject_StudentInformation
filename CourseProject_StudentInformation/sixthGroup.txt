@@ -1,5 +1,5 @@
-Borislava Nikolova Dobreva 0168209 Algebra 5.65 DIS1 5.33 DSTR2 5.58
-Eleonora Dimitrova Piryankova 0232476 UP 5.69 OOP 5.82 SDA 3.99 English 4.79
+Borislava Nikolova Dobreva 0168209 Algebra 5.65 Geometry 5.33 Informatics 5.58
+Bistra Yavorova Blateva 0563341 Algebra 5.98 Geometry 4.63
+Eleonora Dimitrova Piryankova 0232476 Biology 5.69 Chemistry 5.82 English 3.99 Physics 4.79
 Apostol Radoslavov Tsvetkov 0302511 Algebra 3.84 Geometry 4.56
-Bistra Yavorova Blateva 0563341 DIS1 5.98 DIS2 4.63
-Veselin Haralampi Krystev 0909356 DSTR1 3.05 DSTR2 4.03
+Veselin Haralampi Krystev 0909356 Biology 3.05 Chemistry 4.03
