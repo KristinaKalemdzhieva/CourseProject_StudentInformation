@@ -7,32 +7,155 @@ void mainMenu();
 
 void groupMenu(const int group);
 
+bool nameValidation(const char name[])
+{
+	if (name[0] < 'A' || name[0] > 'Z')
+	{
+		return false;
+	}
+
+	for (int i = 1; name[i] != '\0'; ++i)
+	{
+		if (name[i] < 'a' || name[i] > 'z') 
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool facultyNumberValidation(const char facultyNumber[])
+{
+	if (facultyNumber[0] != '0')
+	{
+		return false;
+	}
+
+	int counter = 1;
+	for (int i = 1; facultyNumber[i] != '\0'; ++i)
+	{
+		if(facultyNumber[i] < '0' || facultyNumber[i] > '9')
+		{
+			return false;
+		}
+		++counter;
+	}
+
+	if (counter != 7)
+	{
+		return false;
+	}
+	return true;
+}
+
+bool disciplineValidation(const char discipline[])
+{
+	if (discipline[0] < 'A' || discipline[0] > 'Z')
+	{
+		return false;
+	}
+
+	for (int i = 1; discipline[i] != '\0'; ++i)
+	{
+		if (discipline[i] < 'a' || discipline[i] > 'z')
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool gradeValidation(const double grade)
+{
+	if (grade < 2.00 || grade > 6.00)
+	{
+		return false;
+	}
+	return true;
+}
+
 void enterStudent(const int group)
 {
-	std::cout << "First name: ";
 	char firstName[20];
-	std::cin >> firstName;
-	std::cout << std::endl;
+	while (true)
+	{
+		std::cout << "First name: ";
+		std::cin >> firstName;
+		std::cout << std::endl;
+		if (nameValidation(firstName) == false)
+		{
+			std::cout << "Incorrectly entered first name! Please, try again!" << std::endl << std::endl;
+		}
+		else
+		{
+			break;
+		}
+	}
 
-	std::cout << "Second name: ";
 	char secondName[25];
-	std::cin >> secondName;
-	std::cout << std::endl;
+	while (true)
+	{
+		std::cout << "Second name: ";
+		std::cin >> secondName;
+		std::cout << std::endl;
+		if (nameValidation(secondName) == false)
+		{
+			std::cout << "Incorrectly entered second name! Please, try again!" << std::endl << std::endl;
+		}
+		else
+		{
+			break;
+		}
+	}
 
-	std::cout << "Last name: ";
 	char lastName[30];
-	std::cin >> lastName;
-	std::cout << std::endl;
+	while (true)
+	{
+		std::cout << "Last name: ";
+		std::cin >> lastName;
+		std::cout << std::endl;
+		if (nameValidation(lastName) == false)
+		{
+			std::cout << "Incorrectly entered last name! Please, try again!" << std::endl << std::endl;
+		}
+		else
+		{
+			break;
+		}
+	}
 
-	std::cout << "Faculty number: ";
 	char facultyNumber[7];
-	std::cin >> facultyNumber;
-	std::cout << std::endl;
+	while (true)
+	{
+		std::cout << "Faculty number: ";
+		std::cin >> facultyNumber;
+		std::cout << std::endl;
+		if (facultyNumberValidation(facultyNumber) == false)
+		{
+			std::cout << "Incorrectly entered faculty number! Please, try again!" << std::endl << std::endl;
+		}
+		else
+		{
+			break;
+		}
+	}
 
-	std::cout << "Total count of student's disciplines: ";
 	int n;
-	std::cin >> n;
-	std::cout << std::endl;
+	while (true)
+	{
+		std::cout << "Total count of student's disciplines: ";
+		std::cin >> n;
+		std::cout << std::endl;
+
+		if (n < 1 || n > 10)
+		{
+			std::cout << "Incorrectly entered total count of student's disciplines! Please, try again!" << std::endl << std::endl;
+		}
+		else
+		{
+			break;
+		}
+	}
 
 	char **disciplines = new char*[n];
 	double marks[10];
@@ -40,13 +163,37 @@ void enterStudent(const int group)
 	{
 		disciplines[i] = new char[15];
 
-		std::cout << "Discipline: ";
-		std::cin >> disciplines[i];
-		std::cout << std::endl;
+		while (true)
+		{
+			std::cout << "Discipline: ";
+			std::cin >> disciplines[i];
+			std::cout << std::endl;
 
-		std::cout << "Mark: ";
-		std::cin >> marks[i];
-		std::cout << std::endl;
+			if (disciplineValidation(disciplines[i]) == false)
+			{
+				std::cout << "Incorrectly entered discipline! Please, try again!" << std::endl << std::endl;
+			}
+			else
+			{
+				break;
+			}
+		}
+
+		while (true)
+		{
+			std::cout << "Grade: ";
+			std::cin >> marks[i];
+			std::cout << std::endl;
+
+			if (gradeValidation(marks[i]) == false)
+			{
+				std::cout << "Incorrectly entered grade! Please, try again!" << std::endl << std::endl;
+			}
+			else
+			{
+				break;
+			}
+		}
 	}
 
 	std::string fileName;
@@ -120,8 +267,19 @@ void unsubscribeStudent(const int group)
 {
 	std::cout << "Enter student's faculty number: ";
 	char facultyNumber[7];
-	std::cin >> facultyNumber;
-	std::cout << std::endl;
+	while (true)
+	{
+		std::cin >> facultyNumber;
+		std::cout << std::endl;
+		if (facultyNumberValidation(facultyNumber) == false)
+		{
+			std::cout << "Incorrectly entered faculty number! Please, try again!" << std::endl << std::endl;
+		}
+		else
+		{
+			break;
+		}
+	}
 
 	std::string fileName;
 	switch (group)
@@ -171,7 +329,7 @@ void unsubscribeStudent(const int group)
 			{
 				if (facultyNumberCurrentLine[i] == facultyNumber[i])
 				{
-					continue;
+					continue;			
 				}
 				else
 				{
@@ -520,15 +678,39 @@ void sortByFacultyNumber(const int group, const char wayToSort)
 
 void sortStudents(const int group)
 {
-	std::cout << "Sort by average success or faculty number (please write 'a' for average success and 'f' for faculty number): ";
 	char sortBy;
-	std::cin >> sortBy;
-	std::cout << std::endl;
+	while (true)
+	{
+		std::cout << "Sort by average success or faculty number (please write 'a' for average success and 'f' for faculty number): ";
+		std::cin >> sortBy;
+		std::cout << std::endl;
 
-	std::cout << "Sort in ascending/descending order (please write 'a' for ASC and 'd' for DESC): ";
+		if (sortBy != 'a' && sortBy != 'f')
+		{
+			std::cout << "Incorrectly entered way to sort! Please, try again!" << std::endl << std::endl;
+		}
+		else
+		{
+			break;
+		}
+	}
+
 	char wayToSort;
-	std::cin >> wayToSort;
-	std::cout << std::endl;
+	while (true)
+	{
+		std::cout << "Sort in ascending/descending order (please write 'a' for ASC and 'd' for DESC): ";
+		std::cin >> wayToSort;
+		std::cout << std::endl;
+
+		if (wayToSort != 'a' && wayToSort != 'd')
+		{
+			std::cout << "Incorrectly entered sorting order! Please, try again!" << std::endl << std::endl;
+		}
+		else
+		{
+			break;
+		}
+	}
 
 	switch (sortBy)
 	{
@@ -608,10 +790,22 @@ void groupMenu(const int group)
 	std::cout << "          4. Print list of the students" << std::endl;
 	std::cout << "          5. Back" << std::endl << std::endl;
 
-	std::cout << "Choose a number: ";
 	int n;
-	std::cin >> n;
-	std::cout << std::endl;
+	while (true)
+	{
+		std::cout << "Choose a number: ";
+		std::cin >> n;
+		std::cout << std::endl;
+
+		if (n < 1 || n > 5)
+		{
+			std::cout << "Incorrectly entered number! Please, try again!" << std::endl << std::endl;
+		}
+		else
+		{
+			break;
+		}
+	}
 
 	switch (n)
 	{
@@ -702,30 +896,90 @@ int getLinesCountFromVariousGroupsAndRememberInformation(const int groupsCount, 
 	return index;
 }
 
+bool groupsValidation(const int groups[], const int count)
+{
+	for (int i = 0; i < count; ++i)
+	{
+		if (groups[i] < 1 || groups[i] > 8)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 void printStudentsFromVariousGroups()
 {
-	std::cout << "Please, enter the count of the groups: ";
 	int n;
-	std::cin >> n;
-	std::cout << std::endl;
-
-	std::cout << "Enter groups (please enter the numbers of the groups separated by spaces): ";
-	int* groups = new int[n];
-	for (int i = 0; i < n; ++i)
+	while (true)
 	{
-		std::cin >> groups[i];
+		std::cout << "Please, enter the count of the groups: ";
+		std::cin >> n;
+		std::cout << std::endl;
+
+		if (n < 2 || n > 8)
+		{
+			std::cout << "Incorrectly entered count of groups! Please, try again!" << std::endl << std::endl;
+		}
+		else
+		{
+			break;
+		}
 	}
-	std::cout << std::endl;
 
-	std::cout << "Sort by average success or faculty number (please write 'a' for average success and 'f' for faculty number): ";
+	int* groups = new int[n];
+	while (true)
+	{
+		std::cout << "Enter groups (please enter the numbers of the groups separated by spaces): ";
+		for (int i = 0; i < n; ++i)
+		{
+			std::cin >> groups[i];
+		}
+		std::cout << std::endl;
+
+		if (groupsValidation(groups, n) == false)
+		{
+			std::cout << "Incorrectly entered groups! Please, try again!" << std::endl << std::endl;
+		}
+		else
+		{
+			break;
+		}
+	}
+
 	char sortBy;
-	std::cin >> sortBy;
-	std::cout << std::endl;
+	while (true)
+	{
+		std::cout << "Sort by average success or faculty number (please write 'a' for average success and 'f' for faculty number): ";
+		std::cin >> sortBy;
+		std::cout << std::endl;
 
-	std::cout << "Sort in ascending/descending order (please write 'a' for ASC and 'd' for DESC): ";
+		if (sortBy != 'a' && sortBy != 'f')
+		{
+			std::cout << "Incorrectly entered way to sort! Please, try again!" << std::endl << std::endl;
+		}
+		else
+		{
+			break;
+		}
+	}
+
 	char wayToSort;
-	std::cin >> wayToSort;
-	std::cout << std::endl;
+	while (true)
+	{
+		std::cout << "Sort in ascending/descending order (please write 'a' for ASC and 'd' for DESC): ";
+		std::cin >> wayToSort;
+		std::cout << std::endl;
+
+		if (wayToSort != 'a' && wayToSort != 'd')
+		{
+			std::cout << "Incorrectly entered sorting order! Please, try again!" << std::endl << std::endl;
+		}
+		else
+		{
+			break;
+		}
+	}
 
 	char** studentsInformation = new char* [200];
 	char** facultyNumbers = new char* [200];
@@ -794,10 +1048,22 @@ void mainMenu()
 	std::cout << "          9. Print student information for more than one group" << std::endl;
 	std::cout << "         10. Exit" << std::endl << std::endl;
 
-	std::cout << "Choose a number: ";
 	int n;
-	std::cin >> n;
-	std::cout << std::endl;
+	while (true)
+	{
+		std::cout << "Choose a number: ";
+		std::cin >> n;
+		std::cout << std::endl;
+
+		if (n < 1 || n > 10)
+		{
+			std::cout << "Incorrectly entered number! Please, try again!" << std::endl << std::endl;
+		}
+		else
+		{
+			break;
+		}
+	}
 
 	switch (n)
 	{
