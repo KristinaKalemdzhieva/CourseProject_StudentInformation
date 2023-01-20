@@ -1,4 +1,21 @@
-﻿#include <iostream>
+﻿/**
+*
+* Solution to course project # 05
+* Introduction to programming course
+* Faculty of Mathematics and Informatics of Sofia University
+* Winter semester 2022/2023
+*
+* @author Kristina Kalemdzhieva
+* @idnumber 0MI0600193
+* @compiler VC
+*
+* <Student Information project>
+*
+*/
+
+
+
+#include <iostream>
 #include <fstream>
 #include <string>
 #include <sstream>
