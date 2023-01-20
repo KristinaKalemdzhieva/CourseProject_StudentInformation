@@ -82,6 +82,7 @@ void enterStudent(const int group)
 		std::cout << "First name: ";
 		std::cin >> firstName;
 		std::cout << std::endl;
+
 		if (nameValidation(firstName) == false)
 		{
 			std::cout << "Incorrectly entered first name! Please, try again!" << std::endl << std::endl;
@@ -98,6 +99,7 @@ void enterStudent(const int group)
 		std::cout << "Second name: ";
 		std::cin >> secondName;
 		std::cout << std::endl;
+
 		if (nameValidation(secondName) == false)
 		{
 			std::cout << "Incorrectly entered second name! Please, try again!" << std::endl << std::endl;
@@ -114,6 +116,7 @@ void enterStudent(const int group)
 		std::cout << "Last name: ";
 		std::cin >> lastName;
 		std::cout << std::endl;
+
 		if (nameValidation(lastName) == false)
 		{
 			std::cout << "Incorrectly entered last name! Please, try again!" << std::endl << std::endl;
@@ -130,6 +133,7 @@ void enterStudent(const int group)
 		std::cout << "Faculty number: ";
 		std::cin >> facultyNumber;
 		std::cout << std::endl;
+
 		if (facultyNumberValidation(facultyNumber) == false)
 		{
 			std::cout << "Incorrectly entered faculty number! Please, try again!" << std::endl << std::endl;
@@ -265,12 +269,13 @@ void getFacultyNumber(const char line[], char facultyNumber[])
 
 void unsubscribeStudent(const int group)
 {
-	std::cout << "Enter student's faculty number: ";
 	char facultyNumber[7];
 	while (true)
 	{
+		std::cout << "Enter student's faculty number: ";
 		std::cin >> facultyNumber;
 		std::cout << std::endl;
+
 		if (facultyNumberValidation(facultyNumber) == false)
 		{
 			std::cout << "Incorrectly entered faculty number! Please, try again!" << std::endl << std::endl;
