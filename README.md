@@ -1,1 +1,6 @@
 # CourseProject_StudentInformation
+
+This project maintains information about students in certain university.
+There are 8th groups of students. Every student have first, second and last name, faculty number, disciplines studied and the grade for each of them. The faculty number compulsory starts with '0' and has 7 numbers at all. The disciplines in the university are: Algebra, Arts, Biology, Chemistry, English, Geography, Geometry, History, Informatics and Physics. It is possible for each student to have more than one discipline. The whole information is saved in text files. There are 8 text files - one for every group.
+There is a main menu that has 10 options: the first eight lead to group menus, the 9th option is to print information for students from various groups sorted in selected way(by faculty number or average success and in ascending or descending order) and the 10th option is to exit the program.
+The user can access the data of each group through the supporting group menus. The group menus have 5 options - to enter a new student, to unsubscribe a student, to sort the students' information in the groups's text file by average success or faculty number and in ascending or descending order, to print the students and to go back to the main menu.
